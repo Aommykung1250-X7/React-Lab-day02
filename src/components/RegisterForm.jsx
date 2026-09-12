@@ -1,25 +1,27 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 
-// // ต่อจาก RegisterForm.jsx ที่เขียนร่วมกันตอนเช้า (บล็อก 2.5) — มี name/email/age และ validate() พื้นฐานแล้ว
-// // TODO B1: เพิ่มฟิลด์ phone เข้า form state (object เดียว — ห้ามแยก useState ทีละฟิลด์)
-// // TODO B1: validate phone — ตัวเลข 10 หลัก ขึ้นต้นด้วย 0 เท่านั้น
-// // TODO B1: เข้มงวด validate email ขึ้น — ต้องมีตัวอักษรอย่างน้อย 1 ตัวหลัง @ ด้วย ไม่ใช่แค่ includes("@")
-// // TODO B2: ปุ่ม submit ตั้ง disabled เมื่อมี error ค้างอยู่ในฟอร์ม
-// // TODO B2: กรอกถูกทุกช่องแล้ว submit → แสดงข้อความสำเร็จบนหน้าจอ (ไม่ใช่แค่ console.log)
+// ต่อจาก RegisterForm.jsx ที่เขียนร่วมกันตอนเช้า (บล็อก 2.5) — มี name/email/age และ validate() พื้นฐานแล้ว
+// TODO B1: เพิ่มฟิลด์ phone เข้า form state (object เดียว — ห้ามแยก useState ทีละฟิลด์)
+// TODO B1: validate phone — ตัวเลข 10 หลัก ขึ้นต้นด้วย 0 เท่านั้น
+// TODO B1: เข้มงวด validate email ขึ้น — ต้องมีตัวอักษรอย่างน้อย 1 ตัวหลัง @ ด้วย ไม่ใช่แค่ includes("@")
+// TODO B2: ปุ่ม submit ตั้ง disabled เมื่อมี error ค้างอยู่ในฟอร์ม
+// TODO B2: กรอกถูกทุกช่องแล้ว submit → แสดงข้อความสำเร็จบนหน้าจอ (ไม่ใช่แค่ console.log)
 
-// function RegisterForm() {
-//   const [form, setForm] = useState({ name: "", email: "", age: "", phone: "" })
-//   const [errors, setErrors] = useState({})
+function RegisterForm() {
+  const [form, setForm] = useState({ name: "", email: "", age: "", phone: "" })
+  const [errors, setErrors] = useState({})
 
-//   const updateField = (field, value) => {
-//     setForm({ ...form, [field]: value })
-//     setErrors({ ...errors, [field]: undefined })
-//   }
+  const updateField = (field, value) => {
+    setForm({ ...form, [field]: value })
+    setErrors({ ...errors, [field]: undefined })
+  }
+  const hasErrors = Object.values(errors).some(Boolean)
 
   const validate = () => {
     const newErrors = {}
     if (form.name.trim() === "") newErrors.name = "กรุณากรอกชื่อ"
-    if (!form.email.includes("@")) newErrors.email = "อีเมลไม่ถูกต้อง"
+    const parts = form.email.split("@")
+    if (parts.length !== 2 || parts[0].trim() === "" || parts[1].trim() === "") newErrors.email = "อีเมลไม่ถูกต้อง"
     const ageNum = Number(form.age)
     if (form.age === "" || ageNum < 18 || ageNum > 100) {
       newErrors.age = "อายุต้องอยู่ระหว่าง 18–100"
@@ -63,11 +65,18 @@
         className={`w-full border rounded-lg px-3 py-2 ${errors.phone ? "border-red-500" : "border-gray-300"} focus:outline-none focus:ring-2 focus:ring-gray-300`} />
       {errors.phone && <p className="text-red-600 text-sm">{errors.phone}</p>}
 
-      <button type="submit" className="w-full py-2 rounded-lg bg-gray-300 text-gray-500 font-bold hover:bg-gray-400 hover:text-gray-700 ">
+      <button
+        type="submit"
+        disabled={hasErrors}
+        className={`w-full py-2 rounded-lg font-bold transition-all ${hasErrors
+            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+            : "bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
+          }`}
+      >
         สมัคร
       </button>
     </form>
   )
 }
 
-// export default RegisterForm
+export default RegisterForm
