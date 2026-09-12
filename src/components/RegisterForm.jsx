@@ -45,25 +45,25 @@ function RegisterForm() {
 
       <p className="text-sm text-gray-600">ชื่อ</p>
       <input value={form.name} onChange={e => updateField("name", e.target.value)} placeholder="ชื่อ"
-        className={`w-full border rounded-lg px-3 py-2 ${errors.name ? "border-red-500" : "border-gray-300"}`} />
+        className={`w-full border rounded-lg px-3 py-2 ${errors.name ? "border-red-500" : "border-gray-300"} focus:outline-none focus:ring-2 focus:ring-gray-300`} />
       {errors.name && <p className="text-red-600 text-sm">{errors.name}</p>}
 
       <p className="text-sm text-gray-600">อีเมล</p>
       <input value={form.email} onChange={e => updateField("email", e.target.value)} placeholder="อีเมล"
-        className={`w-full border rounded-lg px-3 py-2 ${errors.email ? "border-red-500" : "border-gray-300"}`} />
+        className={`w-full border rounded-lg px-3 py-2 ${errors.email ? "border-red-500" : "border-gray-300"} focus:outline-none focus:ring-2 focus:ring-gray-300`} />
       {errors.email && <p className="text-red-600 text-sm">{errors.email}</p>}
 
       <p className="text-sm text-gray-600">อายุ</p>
       <input value={form.age} onChange={e => updateField("age", e.target.value)} placeholder="อายุ"
-        className={`w-full border rounded-lg px-3 py-2 ${errors.age ? "border-red-500" : "border-gray-300"}`} />
+        className={`w-full border rounded-lg px-3 py-2 ${errors.age ? "border-red-500" : "border-gray-300"} focus:outline-none focus:ring-2 focus:ring-gray-300`} />
       {errors.age && <p className="text-red-600 text-sm">{errors.age}</p>}
 
       <p className="text-sm text-gray-600">เบอร์โทรศัพท์</p>
       <input value={form.phone} onChange={e => updateField("phone", e.target.value)} placeholder="เบอร์โทร"
-        className={`w-full border rounded-lg px-3 py-2 ${errors.phone ? "border-red-500" : "border-gray-300"}`} />
+        className={`w-full border rounded-lg px-3 py-2 ${errors.phone ? "border-red-500" : "border-gray-300"} focus:outline-none focus:ring-2 focus:ring-gray-300`} />
       {errors.phone && <p className="text-red-600 text-sm">{errors.phone}</p>}
 
-      <button type="submit" className="w-full py-2 rounded-lg bg-gray-300 text-gray-800 font-bold">
+      <button type="submit" className="w-full py-2 rounded-lg bg-gray-300 text-gray-500 font-bold hover:bg-gray-400 hover:text-gray-700 ">
         สมัคร
       </button>
     </form>
